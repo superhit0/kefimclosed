@@ -6,5 +6,5 @@ Build from Source:
 
 
 Using jar:
-1.java -jar kefimclosed-1.0-jar-with-dependencies.jar -k [int--size-of-k] -i [string-path--input-file] -o [string-path--output-file] -sup [boolean--activate-subtree-pruning] -tm [boolean--activate-transaction-merging] -c [int--maximum-transactions] -sup [set-closed-pattern-jump]
+1.java -jar kefim-1.0-jar-with-dependencies.jar -k [int--size-of-k] -i [string-path--input-file] -o [string-path--output-file] -sup [boolean--activate-subtree-pruning] -tm [boolean--activate-transaction-merging] -c [int--maximum-transactions]
 2. Output Itemsets in output file and stats printed on console.
