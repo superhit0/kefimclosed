@@ -41,9 +41,11 @@ import org.manyu.kefimclosed.MemoryLogger;
  */
 public class AlgoKEFIMClosed {
 
+	//MANYU
 	/** the set of high-utility itemsets */
 	private List<Itemset> topK;
 	private int k;
+	//MANYU
 	private Itemsets highUtilityItemsets;
 
 	/** object to write the output file */
@@ -135,8 +137,10 @@ public class AlgoKEFIMClosed {
 			int maximumTransactionCount, boolean activateSubtreeUtilityPruning, boolean activateClosedPatternJump)
 			throws IOException {
 
+		//MANYU
 		this.k=k;
 		topK=new ArrayList<Itemset>();
+		//MANYU
 
 		// reset variables for statistics
 		mergeCount = 0;
@@ -404,7 +408,9 @@ public class AlgoKEFIMClosed {
 
 		// close the output file
 		if (writer != null) {
+			//MANYU
 			writeOut();
+			//MANYU
 			writer.close();
 		}
 
@@ -415,6 +421,7 @@ public class AlgoKEFIMClosed {
 		return highUtilityItemsets;
 	}
 
+	//MANYU
 	private void writeOut() {
 		if(writer!=null){
 			try{
@@ -431,6 +438,7 @@ public class AlgoKEFIMClosed {
 			}
 		}
 	}
+	//MANYU
 
 	/**
 	 * Implementation of Insertion sort for sorting a list of items by
@@ -1173,6 +1181,7 @@ public class AlgoKEFIMClosed {
 //			// so that we are ready for writing the next itemset.
 //			writer.write(buffer.toString());
 //			writer.newLine();
+			//MANYU
 			if(utility>minUtil){
 				if(topK.size()<k){
 					topK.add(new Itemset(Arrays.copyOfRange(temp,0,tempPosition),utility));
@@ -1194,6 +1203,7 @@ public class AlgoKEFIMClosed {
 				topK.add(new Itemset(Arrays.copyOfRange(temp,0,tempPosition),utility));
 				minUtil=utility;
 			}
+			//MANYU
 		}
 	}
 
