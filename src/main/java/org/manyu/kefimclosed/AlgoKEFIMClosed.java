@@ -42,10 +42,12 @@ import org.manyu.kefimclosed.MemoryLogger;
 public class AlgoKEFIMClosed {
 
 	//MANYU
-	/** the set of high-utility itemsets */
+	// Top-K itemsets
 	private List<Itemset> topK;
 	private int k;
 	//MANYU
+
+	/** the set of high-utility itemsets */
 	private Itemsets highUtilityItemsets;
 
 	/** object to write the output file */
@@ -422,6 +424,7 @@ public class AlgoKEFIMClosed {
 	}
 
 	//MANYU
+	//Output Itemsets
 	private void writeOut() {
 		if(writer!=null){
 			try{
@@ -1182,13 +1185,16 @@ public class AlgoKEFIMClosed {
 //			writer.write(buffer.toString());
 //			writer.newLine();
 			//MANYU
+            //Execute if current item has utility > minutil
 			if(utility>minUtil){
 				if(topK.size()<k){
+					//Add to topK if set doest not have k itemsets
 					topK.add(new Itemset(Arrays.copyOfRange(temp,0,tempPosition),utility));
 					if(minUtil==1)
 						minUtil=utility;
 					return;
 				}
+				//find minimum element from topK and replace it with current item
 				topK.remove(Collections.min(topK, new Comparator<Itemset>() {
 					@Override
 					public int compare(Itemset o1, Itemset o2) {
