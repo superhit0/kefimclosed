@@ -4,4 +4,4 @@
 *.jar
 *.txt
 *~
-src/test
+/src/test/
