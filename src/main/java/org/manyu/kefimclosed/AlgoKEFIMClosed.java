@@ -1207,7 +1207,17 @@ public class AlgoKEFIMClosed {
 					}
 				}));
 				topK.add(new Itemset(Arrays.copyOfRange(temp,0,tempPosition),utility));
-				minUtil=utility;
+				minUtil=(int)Collections.min(topK, new Comparator<Itemset>() {
+					@Override
+					public int compare(Itemset o1, Itemset o2) {
+						if(o1.getUtility()<o2.getUtility())
+							return -1;
+						else if(o1.getUtility()>o2.getUtility())
+							return 1;
+						else
+							return 0;
+					}
+				}).getUtility();
 			}
 			//MANYU
 		}
