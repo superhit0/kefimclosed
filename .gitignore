@@ -5,3 +5,5 @@
 *.txt
 *~
 /src/test/
+/src/test/java/
+/src/test/java/org/manyu/kefimclosed/AppTest.java
