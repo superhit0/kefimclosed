@@ -3,11 +3,7 @@ package org.manyu.kefimclosed;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import org.manyu.kefimclosed.MemoryLogger;
 
@@ -43,7 +39,8 @@ public class AlgoKEFIMClosed {
 
 	//MANYU
 	// Top-K itemsets
-	private List<Itemset> topK;
+	private LinkedList<Itemset> topK;
+	private Comparator<Itemset> topKComparator;
 	private int k;
 	//MANYU
 
@@ -141,7 +138,18 @@ public class AlgoKEFIMClosed {
 
 		//MANYU
 		this.k=k;
-		topK=new ArrayList<Itemset>();
+		topKComparator=new Comparator<Itemset>() {
+			@Override
+			public int compare(Itemset o1, Itemset o2) {
+				if(o1.getUtility()<o2.getUtility())
+					return -1;
+				else if(o1.getUtility()>o2.getUtility())
+					return 1;
+				else
+					return 0;
+			}
+		};
+		topK=new SortedList<Itemset>(topKComparator);
 		//MANYU
 
 		// reset variables for statistics
@@ -1190,34 +1198,14 @@ public class AlgoKEFIMClosed {
 				if(topK.size()<k){
 					//Add to topK if set doest not have k itemsets
 					topK.add(new Itemset(Arrays.copyOfRange(temp,0,tempPosition),utility));
-					if(minUtil==1)
+					if(topK.size()==k-1&&minUtil==1)
 						minUtil=utility;
 					return;
 				}
 				//find minimum element from topK and replace it with current item
-				topK.remove(Collections.min(topK, new Comparator<Itemset>() {
-					@Override
-					public int compare(Itemset o1, Itemset o2) {
-						if(o1.getUtility()<o2.getUtility())
-							return -1;
-						else if(o1.getUtility()>o2.getUtility())
-							return 1;
-						else
-							return 0;
-					}
-				}));
+				topK.removeFirst();
 				topK.add(new Itemset(Arrays.copyOfRange(temp,0,tempPosition),utility));
-				minUtil=(int)Collections.min(topK, new Comparator<Itemset>() {
-					@Override
-					public int compare(Itemset o1, Itemset o2) {
-						if(o1.getUtility()<o2.getUtility())
-							return -1;
-						else if(o1.getUtility()>o2.getUtility())
-							return 1;
-						else
-							return 0;
-					}
-				}).getUtility();
+				minUtil= (int) topK.get(0).getUtility();
 			}
 			//MANYU
 		}
